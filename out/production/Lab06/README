@@ -1,0 +1,39 @@
+# SE 317 Lab06
+
+# Kaden Wingert and Tyler Schaeffer
+
+## ATM Machine and the Utility Company
+This program simulates an ATM system where users can perform various banking operations such as checking balance, depositing, withdrawing, transferring funds, and accessing utility account information.
+
+
+## Usage
+
+1. **Starting the Application**: Run the `Main.java` file to start the ATM program.
+
+2. **Main Menu**: Upon starting the application, you will see the following options:
+   - **1: Go to the next Day**: Advances the day, resetting daily transaction limits.
+   - **2: Access Utility Account**: Allows access to utility account actions such as checking payment history and paying bills.
+   - **3: Access ATM**: Enters the ATM menu for banking transactions.
+   - **4: Quit**: Exits the application.
+
+3. **Utility Account Menu**:
+   - **1: Check Payment History**: View past payment transactions.
+   - **2: Pay Upcoming Bill**: Pay an upcoming bill if available.
+   - **3: Exit**: Return to the main menu.
+
+4. **ATM Menu**:
+   - **1: Check Balance**: Check balance of either checking or savings account.
+   - **2: Deposit**: Deposit funds into either checking or savings account.
+   - **3: Withdraw**: Withdraw funds from checking account.
+   - **4: Transfer**: Transfer funds between checking and savings account.
+   - **5: Exit**: Return to the main menu.
+
+5. **Exiting the Application**: Choose option 4 from the main menu to exit the application.
+
+## Notes
+- The program keeps track of the current day and enforces daily transaction limits.
+- Bill payment functionality is available only if there are upcoming bills to pay.
+
+### Database Notes
+- We used a JSON file for our persistant storage.
+- To reset the data, you can copy the contents from database-reset.json into the database.json file and then rerun the program
