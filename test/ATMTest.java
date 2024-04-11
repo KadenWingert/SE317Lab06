@@ -8,8 +8,6 @@ import atm.*;
 
 public class ATMTest {
 
-
-
     @Test
     public void testCheckingAccountInitialValues() {
         CheckingAccount account = new CheckingAccount();
