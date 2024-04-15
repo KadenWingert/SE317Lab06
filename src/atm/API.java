@@ -23,7 +23,8 @@ public class API {
             acc.setAmountWithdrawn(((long)holder.get("amountWithdrawn")));
             acc.setAmountDepo(((long)holder.get("amountDepo")));
         } catch(Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            return null;
         }
 
         return acc;
@@ -71,7 +72,8 @@ public class API {
             acc.setAmountDepo(((long)holder.get("amountDepo")));
             acc.setAmountTransferred((long)holder.get("amountTransfer"));
         } catch(Exception e) {
-            e.printStackTrace();
+            return null;
+            //e.printStackTrace();
         }
 
         return acc;
@@ -110,7 +112,11 @@ public class API {
     }
 
     public static UtilityAccount getUtilityAccount() {
-        return new UtilityAccount();
+        if(utilityAccountExists()) {
+            return new UtilityAccount();
+        }else {
+            return null;
+        }
     }
 
     public static boolean utilityAccountExists(){

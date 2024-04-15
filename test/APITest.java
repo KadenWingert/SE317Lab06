@@ -1,11 +1,33 @@
 package test;
 import static org.junit.Assert.*;
 
+import org.json.simple.JSONObject;
+import org.junit.Before;
 import org.junit.Test;
 
 import atm.*;
 
+import java.io.FileWriter;
+
 public class APITest {
+    @Before
+    public void start(){
+        JSONObject database = new JSONObject();
+
+        try  {
+            FileWriter file = new FileWriter("./src/atm/database.json");
+
+            database.put("utilityAccount", null);
+            database.put("savingsAccount", null);
+            database.put("checkingAccount", null);
+            database.put("dayNum", 0);
+            database.put("bills", null);
+            file.write(database.toJSONString());
+            file.flush();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Test
     public void testNullStorage() {
@@ -36,6 +58,10 @@ public class APITest {
 
     @Test
     public void testIncompatibleTypes() {
+        CheckingAccount checkingAccount = new CheckingAccount();
+        checkingAccount.setBalance(1000);
+        API.setCheckingAccount(checkingAccount);
+
         assertNull(API.getUtilityAccount()); // No utility account stored
         assertNotNull(API.getCheckingAccount()); // Checking account stored
         assertNull(API.getSavingsAccount()); // Savings account not stored
