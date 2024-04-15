@@ -1,1 +1,22 @@
-{"utilityAccount":{},"savingsAccount":{"amountTransfer":0,"amountWithdrawn":0,"amountDepo":0,"balance":0},"checkingAccount":{"amountWithdrawn":2,"amountDepo":0,"balance":0},"dayNum":2,"bills":[{"payAmount":300,"payStatus":true,"payDate":5},{"payAmount":750,"payStatus":true,"payDate":16},{"payAmount":423,"payStatus":true,"payDate":18},{"payAmount":987,"payStatus":false,"payDate":38}]}
+{"utilityAccount":{"accNum":123456,"password":"2","username":"1"},"savingsAccount":{"amountTransfer":0,"amountWithdrawn":0,"amountDepo":0,"balance":0},"checkingAccount":{"amountWithdrawn":0,"amountDepo":0,"balance":0},"dayNum":0,"bills" : [
+  {
+    "payAmount" : 300,
+    "payStatus" : true,
+    "payDate":5
+  },
+  {
+    "payAmount":750,
+    "payStatus":true,
+    "payDate":16
+  },
+  {
+    "payAmount" : 423,
+    "payStatus" : true,
+    "payDate" : 18
+  },
+  {
+    "payAmount" : 987,
+    "payStatus" : false,
+    "payDate" : 38
+  }
+]}

@@ -128,7 +128,7 @@ public class Main {
               if (menuSelect == 1) { // Increment Day
                 dayNum++;
                 checkAcc.setAmountDepo(0);
-                checkAcc.setAmountWithdrawn(dayNum);
+                //checkAcc.setAmountWithdrawn(dayNum);
                 saveAcc.setAmountDepo(0);
                 saveAcc.setAmountWithdrawn(0);
                 saveAcc.setAmountTransferred(0);
