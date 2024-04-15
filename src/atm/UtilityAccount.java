@@ -29,13 +29,13 @@ public class UtilityAccount {
         }
     }
 
-    UtilityAccount(String username, String password){
+    public UtilityAccount(String username, String password){
         this.username = username;
         this.password = password;
         accountNumber = ++lastID;
     }
 
-    void setAccount(){
+    public void setAccount(){
         JSONParser parser = new JSONParser();
 
         try {
@@ -62,19 +62,19 @@ public class UtilityAccount {
         }
     }
 
-    boolean checkUsername(String username){
+    public boolean checkUsername(String username){
         return username.equals(this.username);
     }
 
-    boolean checkPassword(String password){
+    public boolean checkPassword(String password){
         return password.equals(this.password);
     }
 
-    boolean checkAccountNum(int num){
+    public boolean checkAccountNum(int num){
         return num == accountNumber;
     }
 
-    long getAccountNumber(){
+    public long getAccountNumber(){
         return accountNumber;
     }
 }

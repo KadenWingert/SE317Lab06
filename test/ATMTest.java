@@ -89,6 +89,16 @@ public class ATMTest {
     }
 
     @Test
+    public void loginTest() {
+        UtilityAccount utilAccount = new UtilityAccount("test", "pass");
+
+        assertFalse(utilAccount.checkPassword("wrongPass"));
+        assertFalse(utilAccount.checkUsername("wrongName"));
+        assertTrue(utilAccount.checkUsername("test"));
+        assertTrue(utilAccount.checkPassword("pass"));
+    }
+
+    @Test
     public void cantExceedSavingsTransfer() {
         SavingsAccount saveAcc = new SavingsAccount();
         saveAcc.setBalance(1000);

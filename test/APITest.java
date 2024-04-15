@@ -52,11 +52,17 @@ public class APITest {
     public void testNormalCases() {
         CheckingAccount checkingAccount = new CheckingAccount();
         SavingsAccount savingsAccount = new SavingsAccount();
+        UtilityAccount utilAccount = new UtilityAccount("test", "pass");
         checkingAccount.setBalance(1000);
         savingsAccount.setBalance(500);
         API.setCheckingAccount(checkingAccount);
         API.setSavingsAccount(savingsAccount);
         API.setDayNum(1);
+
+        assertFalse(utilAccount.checkPassword("wrongPass"));
+        assertFalse(utilAccount.checkUsername("wrongName"));
+        assertTrue(utilAccount.checkUsername("test"));
+        assertTrue(utilAccount.checkPassword("pass"));
 
         assertNotNull(API.getCheckingAccount()); // Checking account stored
         assertNotNull(API.getSavingsAccount()); // Savings account stored
@@ -69,8 +75,10 @@ public class APITest {
         SavingsAccount savingsAccount = new SavingsAccount();
         checkingAccount.setBalance(1000);
         savingsAccount.setBalance(500);
-       //TODO
-        // UtilityAccount utilityAccount = new UtilityAccount();
+
+        UtilityAccount utilityAccount = new UtilityAccount("CS317", "password");
+
+        API.setUtilityAccount(utilityAccount);
         API.setCheckingAccount(checkingAccount);
         API.setSavingsAccount(savingsAccount);
 
