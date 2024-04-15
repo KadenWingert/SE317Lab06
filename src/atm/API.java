@@ -1,5 +1,7 @@
 package atm;
 import java.io.*;
+import java.util.Scanner;
+
 import org.json.simple.*;
 import org.json.simple.parser.*;
 import org.json.simple.JSONObject;
@@ -103,9 +105,36 @@ public class API {
         }
     }
 
+    public static UtilityAccount makeUtilityAccount(String username, String password){
+        return new UtilityAccount(username, password);
+    }
+
     public static UtilityAccount getUtilityAccount() {
-        UtilityAccount acc = new UtilityAccount();
-        return acc;
+        return new UtilityAccount();
+    }
+
+    public static boolean utilityAccountExists(){
+        JSONParser parser = new JSONParser();
+
+        try {
+            String filePath = new File("").getAbsolutePath();
+            Object obj = parser.parse(new FileReader(filePath + "/src/atm/database.json"));
+            JSONObject jsonObject = (JSONObject)obj;
+
+            JSONObject holder = (JSONObject) jsonObject.get("utilityAccount");
+            long accountNumber = (long)holder.get("accNum");
+            String username = (String)holder.get("username");
+            String password = (String)holder.get("password");
+            return true;
+        } catch(Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+    public static void setUtilityAccount(UtilityAccount acc) {
+        acc.setAccount();
     }
 
     public static long getDayNum() {

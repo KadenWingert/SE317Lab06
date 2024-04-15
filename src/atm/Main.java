@@ -1,6 +1,9 @@
 package atm;
 
-import java.util.*;
+import java.util.Scanner;
+
+import static atm.API.setUtilityAccount;
+import static atm.API.utilityAccountExists;
 
 public class Main {
 
@@ -9,6 +12,87 @@ public class Main {
         int menuSelect = 0;
         int subMenuSelect = 0;
         System.out.println("Starting Application");
+
+        //login to account
+        UtilityAccount utilAcc;
+            if(utilityAccountExists()) {
+                utilAcc = new UtilityAccount();
+                System.out.println("Signing in to Account");
+                while(true) {
+                    int input;
+                    while (true) {
+                        System.out.println("Enter 1 to use username, 2 for account number: ");
+                        try {
+                            input = Integer.parseInt(scan.next());
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("Invalid Input");
+                        }
+                    }
+                    if(input == 1){
+                        int i;
+                        for(i = 0; i < 3; i++){
+                            System.out.println("Input username: ");
+                            String username = scan.next();
+                            System.out.println("Input password: ");
+                            String password = scan.next();
+                            if(utilAcc.checkPassword(password) && utilAcc.checkUsername(username)){
+                                System.out.println("Successful Sign-in");
+                                break;
+                            } else{
+                                System.out.println("Incorrect Username or Password");
+                            }
+                        }
+                        if(i >= 3){
+                            System.out.println("Too many unsuccessful login attempts.");
+                            System.out.println("Exiting program...");
+                            return;
+                        }
+                        break;
+                    }else if(input == 2){
+                        int i;
+                        for(i = 0; i < 3; i++){
+                            int number;
+                            while(true) {
+                                try {
+                                    System.out.println("Input account number: ");
+                                    number = Integer.parseInt(scan.next());
+                                    break;
+                                } catch (Exception e) {
+                                    System.out.println("Invalid Input");
+                                }
+                            }
+                            System.out.println("Input password: ");
+                            String password = scan.next();
+                            if(utilAcc.checkPassword(password) && utilAcc.checkAccountNum(number)){
+                                System.out.println("Successful Sign-in");
+                                break;
+                            } else{
+                                System.out.println("Incorrect Account Number or Password");
+                            }
+                        }
+                        if(i >= 3){
+                            System.out.println("Too many unsuccessful login attempts.");
+                            System.out.println("Exiting program...");
+                            return;
+                        }
+                        break;
+                    }else{
+                        System.out.println("Invalid Input");
+                    }
+                }
+            }else {
+                System.out.println("Creating new Account");
+                System.out.println("Input username: ");
+                String username = scan.next();
+                System.out.println("Input password: ");
+                String password = scan.next();
+                utilAcc = new UtilityAccount(username, password);
+                setUtilityAccount(utilAcc);
+
+                System.out.println("Account creation successful. Account number is " + utilAcc.getAccountNumber() + ".");
+            }
+
         // retrieving user info from data storage
         CheckingAccount checkAcc = API.getCheckingAccount();
         SavingsAccount saveAcc = API.getSavingsAccount();
@@ -26,7 +110,14 @@ public class Main {
             // Scan Menu Select Input
             while(true) {
                 System.out.print("Input: ");
-                menuSelect = scan.nextInt();
+                while (true) {
+                    try {
+                        menuSelect = scan.nextInt();
+                        break;
+                    } catch (Exception e) {
+                        System.out.println("Invalid Input");
+                    }
+                }
                 System.out.println();
                 if (menuSelect < 1 || menuSelect > 4) {
                     System.out.println("Invalid Input");
@@ -52,8 +143,15 @@ public class Main {
 
                     // Scanning menu input select
                     while(true) {
-                        System.out.print("Input: ");
-                        subMenuSelect = scan.nextInt();
+                        while (true) {
+                            try {
+                                System.out.print("Input: ");
+                                subMenuSelect = scan.nextInt();
+                                break;
+                            } catch (Exception e) {
+                                System.out.println("Invalid Input");
+                            }
+                        }
                         System.out.println();
                         if (subMenuSelect < 1 || subMenuSelect > 3) {
                             System.out.println("Invalid Input");
@@ -83,8 +181,15 @@ public class Main {
                         System.out.println("Pay Date: " + pastBills[3].getPayDate() + ", Amount Due: " + pastBills[3].getPayAmount());
                         System.out.println("Would you like to pay this bill? 1: Yes, 2: No");
 
-                        System.out.print("Input: ");
-                        subMenuSelect = scan.nextInt();
+                        while (true) {
+                            try {
+                                System.out.print("Input: ");
+                                subMenuSelect = scan.nextInt();
+                                break;
+                            } catch (Exception e) {
+                                System.out.println("Invalid Input");
+                            }
+                        }
                         if (subMenuSelect == 1) {
                             if (pastBills[3].getPayAmount() > checkAcc.getBalance()) {
                                 System.out.println("You don't have enough funds!");
@@ -113,8 +218,15 @@ public class Main {
 
                       // Scanning menu select input
                       while(true) {
-                          System.out.print("Input: ");
-                          subMenuSelect = scan.nextInt();
+                          while (true) {
+                              try {
+                                  System.out.print("Input: ");
+                                  subMenuSelect = scan.nextInt();
+                                  break;
+                              } catch (Exception e) {
+                                  System.out.println("Invalid Input");
+                              }
+                          }
                           System.out.println();
                           if (subMenuSelect < 1 || subMenuSelect > 5) {
                               System.out.println("Invalid Input");
@@ -125,8 +237,15 @@ public class Main {
 
                       if (subMenuSelect == 1) { // Check balance
                           System.out.println("Which account? \n (1) Checking (2) Savings");
-                          System.out.print("Input: ");
-                          subMenuSelect = scan.nextInt();
+                          while (true) {
+                              try {
+                                  System.out.print("Input: ");
+                                  subMenuSelect = scan.nextInt();
+                                  break;
+                              } catch (Exception e) {
+                                  System.out.println("Invalid Input");
+                              }
+                          }
 
                           if (subMenuSelect == 1) { // checking
                               System.out.println("Checking Balance: $" + checkAcc.getBalance());
@@ -135,12 +254,27 @@ public class Main {
                           }
                       } else if (subMenuSelect == 2) { // Deposit
                           System.out.println("Which account? \n (1) Checking (2) Savings");
-                          System.out.print("Input: ");
-                          subMenuSelect = scan.nextInt();
+                          while (true) {
+                              try {
+                                  System.out.print("Input: ");
+                                  subMenuSelect = scan.nextInt();
+                                  break;
+                              } catch (Exception e) {
+                                  System.out.println("Invalid Input");
+                              }
+                          }
 
                           System.out.println("How much?");
-                          System.out.print("Input: ");
-                          int deposit = scan.nextInt();
+                          int deposit;
+                          while (true) {
+                              try {
+                                  System.out.print("Input: ");
+                                  deposit = scan.nextInt();
+                                  break;
+                              } catch (Exception e) {
+                                  System.out.println("Invalid Input");
+                              }
+                          }
 
                           if (subMenuSelect == 1) { // checking logic
                               if ((checkAcc.getAmountDepo() + deposit) > 5000) {
@@ -161,8 +295,16 @@ public class Main {
                           }
                       } else if (subMenuSelect == 3) { // Withdraw
                           System.out.println("How much would you like to withdraw from Checking?");
-                          System.out.print("Input: ");
-                          int withdraw = scan.nextInt();
+                          int withdraw;
+                          while (true) {
+                              try {
+                                  System.out.print("Input: ");
+                                  withdraw = scan.nextInt();
+                                  break;
+                              } catch (Exception e) {
+                                  System.out.println("Invalid Input");
+                              }
+                          }
 
                           if ((checkAcc.getAmountWithdrawn() + withdraw) > 500) {
                               System.out.println("Can only withdraw " + (500 - checkAcc.getAmountWithdrawn()) + " more today into Checking.");
@@ -175,12 +317,28 @@ public class Main {
                           }
                       } else if (subMenuSelect == 4) { // Transfer
                           System.out.println("Which account would you like to transfer FROM? \n (1) Checking (2) Savings");
-                          System.out.print("Input: ");
-                          subMenuSelect = scan.nextInt();
+                          while (true) {
+                              try {
+                                  System.out.print("Input: ");
+                                  subMenuSelect = scan.nextInt();
+                                  break;
+                              } catch (Exception e) {
+                                  System.out.println("Invalid Input");
+                              }
+                          }
 
                           System.out.println("How much?");
-                          System.out.print("Input: ");
-                          int transfer = scan.nextInt();
+                          int transfer;
+                          while (true) {
+                              try {
+                                  System.out.print("Input: ");
+                                  transfer = scan.nextInt();
+                                  break;
+                              } catch (Exception e) {
+                                  System.out.println("Invalid Input");
+                              }
+                          }
+
 
                           if (subMenuSelect == 1) { // checking logic
                               if (checkAcc.getBalance() < transfer) {
